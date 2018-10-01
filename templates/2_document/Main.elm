@@ -39,7 +39,7 @@ update msg model =
 
 view : Model -> Document Msg
 view model =
-    { title = "hello title", body = [ div [] [ text "Hello World" ] ] }
+    { title = "hello title", body = [ div [] [ text "hello world" ] ] }
 
 
 
