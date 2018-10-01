@@ -2,9 +2,9 @@ Usage
 ==
 
 ```bash
-curl https://raw.githubusercontent.com/roine/elm-bootstrap/master/install.sh | bash /dev/stdin myapp
+sh -c "$(curl https://raw.githubusercontent.com/roine/elm-bootstrap/master/install.sh)"
 ```
-
+Note: Few question will be asked during the installation.
 ```bash
 npm install -f parcel-bundler
 ```

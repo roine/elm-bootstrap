@@ -1,5 +1,4 @@
 #!/bin/bash
-R_DIR=${1:-myapp}
 SANDBOX_DIR=0_sandbox
 ELEMENT_DIR=1_element
 DOCUMENT_DIR=2_document
@@ -8,24 +7,28 @@ APPLICATION_DIR=3_application
 function get {
     curl https://github.com/roine/elm-bootstrap/archive/master.tar.gz -LO
     tar xzf master.tar.gz
-    mv elm-bootstrap-master $R_DIR
+    mv elm-bootstrap-master $project_name
     rm master.tar.gz
 }
 
 function set_template {
-    mkdir -p ${R_DIR}/src
-    cp -r ${R_DIR}/templates/${1}/* ${R_DIR}/src
+    mkdir -p $project_name/src
+    cp -r $project_name/templates/${1}/* $project_name/src
 }
 
 function clean_up {
-    rm -rf templates
-    rm install.sh
+    rm -rf $project_name/templates
+    rm $project_name/install.sh
 }
 
 function question {
+    echo "Project name: Default: myapp"
+    read project_name
+    project_name=${project_name:-myapp}
     echo "Which app do you want [0]sandbox, [1]element, [2]document, [3]application? Default: [3]"
     read response
-    if [[ "$response" == "" ]] || [[ "$response" == "3" ]] || [[ "$response" == "application" ]]
+    response=${response:-3}
+    if [[ "$response" == "3" ]] || [[ "$response" == "application" ]]
     then
         get
         set_template $APPLICATION_DIR
